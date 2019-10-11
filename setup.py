@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tree_lstm",
-    version="0.0.1",
+    version="0.0.2",
     author="Inhyuk Na",
     author_email="ina@dblab.postech.ac.kr",
     description="pytorch tree lstm package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/inyukwo1/tree_lstm",
+    url="https://github.com/inyukwo1/tree-lstm",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
