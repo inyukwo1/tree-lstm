@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tree_lstm",
-    version="0.0.2",
+    version="0.0.3",
     author="Inhyuk Na",
     author_email="ina@dblab.postech.ac.kr",
     description="pytorch tree lstm package",
@@ -13,6 +13,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/inyukwo1/tree-lstm",
     packages=setuptools.find_packages(),
+    install_requires=[
+          'torch',
+          'dgl'
+      ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

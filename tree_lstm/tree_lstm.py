@@ -36,7 +36,7 @@ class BatchedTree:
             hiddens = graph.ndata['h']
             node_num, hidden_num = hiddens.size()
             if len(hiddens) < max_nodes_num:
-                padding = torch.zeros((max_nodes_num - node_num, hidden_num))
+                padding = hiddens.new_zeros(size=(max_nodes_num - node_num, hidden_num))
                 hiddens = torch.cat((hiddens, padding), dim=0)
             hidden_states.append(hiddens)
         return torch.stack(hidden_states)
@@ -82,11 +82,11 @@ class NaryTreeLSTMCell(torch.nn.Module):
     def reduce_func(self, nodes):
         h_cat = nodes.mailbox['h'].view(nodes.mailbox['h'].size(0), -1)
         padding_hs = self.n_ary - nodes.mailbox['h'].size(1)
-        padding = torch.zeros(nodes.mailbox['h'].size(0), padding_hs * self.h_size)
+        padding = h_cat.new_zeros(size=(nodes.mailbox['h'].size(0), padding_hs * self.h_size))
         h_cat = torch.cat((h_cat, padding), dim=1)
         f = torch.sigmoid(self.U_f(h_cat)).view(nodes.mailbox['h'].size(0), self.n_ary, self.h_size)
         padding_cs = self.n_ary - nodes.mailbox['c'].size(1)
-        padding = torch.zeros(nodes.mailbox['c'].size(0), padding_cs, self.h_size)
+        padding = h_cat.new_zeros(size=(nodes.mailbox['c'].size(0), padding_cs, self.h_size))
         c = torch.cat((nodes.mailbox['c'], padding), dim=1)
         c = torch.sum(f * c, 1)
         return {'iou': nodes.data['iou'] + self.U_iou(h_cat), 'c': c}
