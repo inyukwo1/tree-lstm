@@ -29,6 +29,9 @@ class Tree:
             self.dgl_graph.add_edge(child_id, added_node_id)
         return added_node_id
 
+    def add_link(self, child_id, parent_id):
+        self.dgl_graph.add_edge(child_id, parent_id)
+
 
 class BatchedTree:
     def __init__(self, tree_list):
