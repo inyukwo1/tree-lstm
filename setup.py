@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tree_lstm",
-    version="0.0.6",
+    version="0.0.7",
     author="Inhyuk Na",
     author_email="ina@dblab.postech.ac.kr",
     description="pytorch tree lstm package",
