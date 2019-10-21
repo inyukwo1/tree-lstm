@@ -24,4 +24,5 @@ Usage
 
 For more detailed usage, please see `test.py`
 
+Thanks for reporting issues / contributions / starts / watches!
 

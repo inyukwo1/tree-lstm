@@ -20,6 +20,15 @@ class Tree:
             self.dgl_graph.add_edge(added_node_id, parent_id)
         return added_node_id
 
+    def add_node_bottom_up(self, child_ids, tensor: torch.Tensor):
+        self.dgl_graph.add_nodes(1, data={'x': tensor.unsqueeze(0),
+                                          'h': tensor.new_zeros(size=(1, self.h_size)),
+                                          'c': tensor.new_zeros(size=(1, self.h_size))})
+        added_node_id = self.dgl_graph.number_of_nodes() - 1
+        for child_id in child_ids:
+            self.dgl_graph.add_edge(child_id, added_node_id)
+        return added_node_id
+
 
 class BatchedTree:
     def __init__(self, tree_list):
